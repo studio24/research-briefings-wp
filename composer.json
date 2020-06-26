@@ -1,0 +1,14 @@
+{
+    "require": {
+        "monolog/monolog": "^2.0@dev",
+        "guzzlehttp/guzzle": "6.5.x-dev",
+        "nayjest/str-case-converter": "dev-master",
+        "symfony/lock": "^5.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "ResearchBriefing\\": "includes/ResearchBriefing/"
+        }
+    },
+    "minimum-stability": "dev"
+}
