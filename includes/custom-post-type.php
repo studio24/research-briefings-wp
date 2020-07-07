@@ -37,7 +37,7 @@ function pds_custom_post_types() {
         'hierarchical'       => false,
         'menu_position'      => 10,
         'supports'           => array( 'title', 'editor', 'author', 'excerpt', 'thumbnail', 'custom-fields' ),
-        'taxonomies'         => array( 'category', 'post_tag', 'type' )
+        'taxonomies'         => array( 'rb_topics', 'post_tag', 'type' )
     );
 
     register_post_type( 'research-briefing', $args );

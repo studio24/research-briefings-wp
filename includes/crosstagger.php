@@ -71,8 +71,12 @@ function research_briefings_wp_page_callback() {
 
 // Needs writing
 function research_briefings_format_wp_categories($currentSettings) {
-    $categories = get_categories(array('hide_empty' => false));
-
+//    $categories = get_categories(array('hide_empty' => false));
+    $categories = get_terms([
+        'taxonomy' => 'rb_topics',
+//        'fields' => 'ids',
+        'hide_empty' => false
+    ]);
     foreach ($categories as $category) {
         $alreadySet = false;
         $extraLi = '';
@@ -106,7 +110,7 @@ function research_briefings_format_rb_topics($currentSettings) {
 
     // Get all WP categories
     $categories = get_terms([
-        'taxonomy' => 'category',
+        'taxonomy' => 'rb_topics',
         'fields' => 'ids',
         'hide_empty' => false
     ]);
@@ -127,7 +131,7 @@ function research_briefings_format_rb_topics($currentSettings) {
             $alreadyTagged[] = $url;
         }
     }
-    
+
     // Loop over each post
     foreach($posts as $p) {
         try {

@@ -274,7 +274,7 @@ class Briefing implements SearchInterface
                 }
             } else {
 
-                $fullName = $briefing['creator']['fullName']['_value'] ? $briefing['creator']['fullName']['_value'] : '';
+                $fullName = isset($briefing['creator']['fullName']) ? ($briefing['creator']['fullName']['_value'] ? $briefing['creator']['fullName']['_value'] : '') : '';
                 $givenName = $briefing['creator']['givenName']['_value'] ? $briefing['creator']['givenName']['_value'] : '';
                 $familyName = $briefing['creator']['familyName']['_value'] ? $briefing['creator']['familyName']['_value'] : '';
 

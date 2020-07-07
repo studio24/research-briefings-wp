@@ -293,7 +293,7 @@ class Wordpress
         // Get the categories to attach to the WP post
         $categories = $this->getCategoriesToAttach($briefing);
 
-        $categoriesTaxonomyIds =  wp_set_object_terms($postId, $categories, 'category');
+        $categoriesTaxonomyIds =  wp_set_object_terms($postId, $categories, 'rb_topics');
         if (is_wp_error($categoriesTaxonomyIds)) {
             throw new TermNotSetException('Category terms not set');
         }
@@ -361,7 +361,7 @@ class Wordpress
             $object->setThumbnail('');
         }
 
-        $terms = get_the_terms($postId , 'category' );
+        $terms = get_the_terms($postId , 'rb_topics' );
 
         // Save the category terms as a comma separated string
         $categories = [];

@@ -18,7 +18,7 @@ require_once __DIR__ . '/includes/research-briefings-import.php';
 }
 
 include_once ('includes/custom-post-type.php');
-include_once('includes/taxonomy.php');
+//include_once('includes/taxonomy.php');
 include_once ('includes/custom-taxonomy.php');
 include_once('includes/loop-modifiers.php');
 //include_once('includes/ingester.php');
@@ -28,6 +28,9 @@ include_once('includes/category-images.php');
 include_once ('includes/add-metadata.php');
 include_once ('includes/custom-search.php');
 include_once ('includes/helper.php');
+include_once ('includes/topics-custom-taxonomy.php');
+
+
 
 if (!empty($_REQUEST['s24_run'])) {
 

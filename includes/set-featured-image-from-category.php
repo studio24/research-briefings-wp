@@ -11,7 +11,7 @@ function pds_set_featured_images_from_category() {
         'post_type' => 'research-briefing',
         'posts_per_page' => 1000,
         'numberposts' => 1000
-        
+
     );
 
     $query = new WP_Query( $args );
@@ -26,7 +26,7 @@ function pds_set_featured_images_from_category() {
 
             $post = get_post(get_the_ID());
 
-            if (has_post_thumbnail($post)) { 
+            if (has_post_thumbnail($post)) {
                 $omitted++;
                 echo "Omitting {$post->ID} ({$post->post_title})<br>\n";
                 continue;
@@ -34,15 +34,19 @@ function pds_set_featured_images_from_category() {
 
             $actualRbImage = null;
 
-            $categories = wp_get_post_categories($post->ID);
+            // Old category taxonomy list
+//            $categories = wp_get_post_categories($post->ID);
+
+            // Renamed category taxonomy list
+            $categories = get_the_terms($post->ID , 'rb_topics' );
 
             foreach ($categories as $category) {
-                $imageId = get_term_meta($category, 'rb_image', true);
+                $imageId = get_term_meta($category->term_id, 'rb_image', true);
                 if($imageId) { $actualRbImage = $imageId; }
             }
 
             if($actualRbImage) {
-                
+
                 echo "Updating {$post->ID} ({$post->post_title}) image to $actualRbImage<br>\n";
                 $updated++;
 

@@ -8,4 +8,4 @@ Wordpress:setImage()
 ```
 
 
-And the code that checks new featured image from categories and updates the images for the posts accordingly, can be found in `htdocs/wp-content/plugins/research-briefings-wp/includes/set-featured-image-from-category.php`
+And the code that checks missing featured image from the early Research briefings import and updates the images for the posts accordingly, can be found in `htdocs/wp-content/plugins/research-briefings-wp/includes/set-featured-image-from-category.php`
