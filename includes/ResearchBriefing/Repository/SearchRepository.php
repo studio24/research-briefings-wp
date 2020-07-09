@@ -25,7 +25,7 @@ class SearchRepository extends BaseRepository
         'url'            => ':url',
         'date'           => ':date',
         'year'           => ':year',
-        'type'           => ':type',
+        'types'           => ':types',
     ];
 
 
@@ -128,13 +128,13 @@ class SearchRepository extends BaseRepository
             $query->bindParam(':categories', $categories, \PDO::PARAM_STR);
         }
 
-        // Briefing type only applies to Research Briefing records
-        if (isset($databaseBindings['type'])) {
-            if (method_exists($search, 'getType')){
-                $type = $search->getType();
+        // Briefing types only apply to Research Briefing records
+        if (isset($databaseBindings['types'])) {
+            if (method_exists($search, 'getTypeTags')){
+                $types = $search->getTypeTags();
             }
 
-            $query->bindParam(':type', $type, \PDO::PARAM_STR);
+            $query->bindParam(':types', $types, \PDO::PARAM_STR);
         }
 
         return $query;

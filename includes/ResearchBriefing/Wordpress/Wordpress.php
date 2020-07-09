@@ -191,6 +191,9 @@ class Wordpress
 
         // Set extra properties to a briefing for search purposes
         $this->setExtraProperties($briefing, $postId);
+
+        // Set all the types to a briefing (RB ones and those added from the CMS) for search purposes
+        $this->setMultipleTypes($briefing, $postId);
     }
 
     /**
@@ -362,6 +365,8 @@ class Wordpress
             $object->setThumbnail('');
         }
 
+
+        // Topic terms
         $terms = get_the_terms($postId , 'rb_topics' );
 
         // Save the category terms as a comma separated string
@@ -445,5 +450,31 @@ class Wordpress
             default:
                 // error?
         }
+    }
+
+
+    /**
+     * Method that sets the multiple types from a RB custom post for the search table
+     * Only when the RB is being updated
+     *
+     * @param Briefing $briefing
+     * @param int $postId
+     */
+    public function setMultipleTypes(Briefing $briefing, int $postId)
+    {
+        // Type terms
+        $typeTerms = get_the_terms($postId, 'rb_types' );
+
+        // Save the type terms as a comma separated string
+        $types = [];
+
+        if (!empty($typeTerms) ) {
+            foreach ($typeTerms as $term) {
+                $types[] = trim(html_entity_decode(($term->name)));
+            }
+        }
+
+        $briefing->setTypeTags(json_encode($types));
+
     }
 }

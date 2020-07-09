@@ -92,6 +92,11 @@ class Briefing implements SearchInterface
     protected $tags;
 
     /**
+     * @var string
+     */
+    protected $typeTags;
+
+    /**
      * Mapping the main research briefing array fields to the object properties
      *
      * @param $data
@@ -784,6 +789,27 @@ class Briefing implements SearchInterface
         $this->tags = $tags;
         return $this;
     }
+
+    /**
+     * Get the multiple types (from the RB import and WP) for the search table
+     *
+     * @return string
+     */
+    public function getTypeTags(): string
+    {
+        return $this->typeTags;
+    }
+
+    /**
+     * @param string $typeTags
+     * @return Briefing
+     */
+    public function setTypeTags(string $typeTags): Briefing
+    {
+        $this->typeTags = $typeTags;
+        return $this;
+    }
+
 
     /**
      * Get the briefing id for the search table

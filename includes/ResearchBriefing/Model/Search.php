@@ -54,7 +54,7 @@ class Search
     protected $categories;
 
     /** @var  */
-    protected $type;
+    protected $types;
 
     /**
      * Model constructor.
@@ -275,18 +275,21 @@ class Search
         return $this;
     }
 
-    public function getType(): ?string
+    /**
+     * @return string|null
+     */
+    public function getTypes(): ?string
     {
-        return $this->type;
+        return $this->types;
     }
 
     /**
-     * @param string $type
+     * @param string $types
      * @return Search
      */
-    public function setType(string $type = null): Search
+    public function setTypes(string $types = null): Search
     {
-        $this->type = $type;
+        $this->types = $types;
         return $this;
     }
 

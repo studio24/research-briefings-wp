@@ -30,7 +30,7 @@ function setPostProperties($briefing) {
        'library'        => $briefing->getSite() === 1 ? 'House of Commons Library' :
                           ($briefing->getSite() === 2 ? 'House of Lords Library' : 'POST'),
        'filter'         => 'raw',
-       'type'           => $briefing->getType()
+       'types'           => json_decode($briefing->getTypes())
 );
     $urlParts = parse_url($postProperties['guid']);
     $postProperties['library_url'] = $urlParts['scheme'] . '://' . $urlParts['host'] . '/';
