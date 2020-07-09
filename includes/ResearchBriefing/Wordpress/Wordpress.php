@@ -311,8 +311,9 @@ class Wordpress
 
         // Get the type slug to attach to the WP post
         $type = $briefing->getType();
+
         if (!empty($type)) {
-            $typeTaxonomyIds =  wp_set_object_terms($postId, $type, 'type');
+            $typeTaxonomyIds =  wp_set_object_terms($postId, $type, 'rb_types', true);
         }
 
         if (is_wp_error($typeTaxonomyIds)) {

@@ -19,7 +19,7 @@ require_once __DIR__ . '/includes/research-briefings-import.php';
 
 include_once ('includes/custom-post-type.php');
 //include_once('includes/taxonomy.php');
-include_once ('includes/custom-taxonomy.php');
+include_once ('includes/types-custom-taxonomy.php');
 include_once('includes/loop-modifiers.php');
 //include_once('includes/ingester.php');
 //include_once('includes/redirector.php');

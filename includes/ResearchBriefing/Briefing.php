@@ -512,8 +512,10 @@ class Briefing implements SearchInterface
     /**
      * Set the briefing type
      *
-     * This translates the incoming type from the Research Briefing API into the type
+     * This translates the incoming type from the Research Briefing API and
+     * the ones that have been manually added in the CMS into the types
      * we want to display on the website.
+     *
      *
      * @param string $type
      * @return Briefing

@@ -35,7 +35,7 @@ function pds_custom_taxonomy() {
         'rewrite'               => array( 'slug' => 'briefing-type' ),
     );
 
-    register_taxonomy( 'type', 'research-briefing', $args );
+    register_taxonomy( 'rb_types', 'research-briefing', $args );
 
 
 }
