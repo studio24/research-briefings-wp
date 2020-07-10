@@ -500,6 +500,10 @@ class Wordpress
     {
         $postFeaturedImageUrl = $this->extractImageFromContent($briefing);
 
+        if (!$postFeaturedImageUrl) {
+            return;
+        }
+
         // Upload the image to the media library
         $upload_dir = wp_upload_dir();
         $image_data = file_get_contents($postFeaturedImageUrl);
