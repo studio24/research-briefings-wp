@@ -230,6 +230,36 @@ class SearchRepository extends BaseRepository
     }
 
     /**
+     * @param $searchField
+     * @param $searchValue
+     * @param $column
+     * @param $field
+     * @return bool
+     */
+    public function updateWhere($searchField, $searchValue, $column, $field)
+    {
+        $sql = 'UPDATE ' . $this->tableName . ' SET ' .'`' . $column. '` = :field ' .' WHERE ' . $searchField  . ' = :searchValue';
+
+        try {
+            $query = $this->connection->prepare($sql);
+            $query->bindParam(':field', $field, \PDO::PARAM_STR);
+            $query->bindParam(':searchValue', $searchValue, \PDO::PARAM_STR);
+
+           $result = $query->execute();
+
+        } catch (PDOException $e) {
+            trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $e->getMessage(), E_USER_ERROR);
+        }
+        if (empty($result)) {
+
+            return false;
+        }
+
+        return $result;
+
+    }
+
+    /**
      * Find all rows based on a query, with pagination
      *
      * @param $sql

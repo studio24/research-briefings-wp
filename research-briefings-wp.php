@@ -29,6 +29,7 @@ include_once ('includes/add-metadata.php');
 include_once ('includes/custom-search.php');
 include_once ('includes/helper.php');
 include_once ('includes/topics-custom-taxonomy.php');
+include_once ('includes/set-types-on-search.php');
 
 
 

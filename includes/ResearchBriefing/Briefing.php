@@ -795,7 +795,7 @@ class Briefing implements SearchInterface
      *
      * @return string
      */
-    public function getTypeTags(): string
+    public function getTypeTags(): ?string
     {
         return $this->typeTags;
     }
