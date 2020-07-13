@@ -1,5 +1,7 @@
 <?php
-
+/***
+ * Updating the research briefing types on search table if they were manually assigned
+ */
 use ResearchBriefing\Repository\SearchRepository;
 
 
@@ -7,6 +9,7 @@ add_action( 'save_post_research-briefing', 'pds_set_types_on_search', 10, 2);
 
 function pds_set_types_on_search($post_id, $post)
 {
+    // Do not run when the data import updates briefings
    if(!isset($_REQUEST['post_name'])) {
 
        return;
