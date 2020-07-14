@@ -7,25 +7,25 @@ add_action( 'init', 'pds_custom_post_types' );
 
 function pds_custom_post_types() {
     $labels = array(
-        'name'               => _x( 'Research Briefings', 'post type general name', 'pds-custom-post-type' ),
-        'singular_name'      => _x( 'Research Briefing', 'post type singular name', 'pds-custom-post-type' ),
-        'menu_name'          => _x( 'Research Briefings', 'admin menu', 'pds-custom-post-type' ),
-        'name_admin_bar'     => _x( 'Research Briefing', 'add new on admin bar', 'pds-custom-post-type' ),
-        'add_new'            => _x( 'Add New', 'book', 'pds-custom-post-type' ),
-        'add_new_item'       => __( 'Add New Research Briefing', 'pds-custom-post-type' ),
-        'new_item'           => __( 'New Research Briefing', 'pds-custom-post-type' ),
-        'edit_item'          => __( 'Edit Research Briefing', 'pds-custom-post-type' ),
-        'view_item'          => __( 'View Research Briefing', 'pds-custom-post-type' ),
-        'all_items'          => __( 'All Research Briefings', 'pds-custom-post-type' ),
-        'search_items'       => __( 'Search Research Briefings', 'pds-custom-post-type' ),
-        'parent_item_colon'  => __( 'Parent Research Briefings:', 'pds-custom-post-type' ),
-        'not_found'          => __( 'No research briefings found.', 'pds-custom-post-type' ),
-        'not_found_in_trash' => __( 'No research briefings found in Trash.', 'pds-custom-post-type' )
+        'name'               => _x( 'Research Briefings', 'post type general name', 'apollo' ),
+        'singular_name'      => _x( 'Research Briefing', 'post type singular name', 'apollo' ),
+        'menu_name'          => _x( 'Research Briefings', 'admin menu', 'apollo' ),
+        'name_admin_bar'     => _x( 'Research Briefing', 'add new on admin bar', 'apollo' ),
+        'add_new'            => _x( 'Add New', 'book', 'apollo' ),
+        'add_new_item'       => __( 'Add New Research Briefing', 'apollo' ),
+        'new_item'           => __( 'New Research Briefing', 'apollo' ),
+        'edit_item'          => __( 'Edit Research Briefing', 'apollo' ),
+        'view_item'          => __( 'View Research Briefing', 'apollo' ),
+        'all_items'          => __( 'All Research Briefings', 'apollo' ),
+        'search_items'       => __( 'Search Research Briefings', 'apollo' ),
+        'parent_item_colon'  => __( 'Parent Research Briefings:', 'apollo' ),
+        'not_found'          => __( 'No research briefings found.', 'apollo' ),
+        'not_found_in_trash' => __( 'No research briefings found in Trash.', 'apollo' )
     );
 
     $args = array(
         'labels'             => $labels,
-        'description'        => __( 'Research briefings', 'pds-custom-post-type' ),
+        'description'        => __( 'Research briefings', 'apollo' ),
         'public'             => true,
         'publicly_queryable' => true,
         'show_ui'            => true,
