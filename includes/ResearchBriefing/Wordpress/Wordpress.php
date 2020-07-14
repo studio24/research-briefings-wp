@@ -274,10 +274,10 @@ class Wordpress
         foreach ($authors as $author) {
 
             // Create the term if it doesn't exist
-            if( !term_exists( $author, 'rb_author' ) ) {
+            if( !term_exists( $author, 'rb_authors' ) ) {
                 wp_insert_term(
                     $author,
-                    'rb_author',
+                    'rb_authors',
                     array(
                         'slug'=> sanitize_title($author)
                     )
@@ -313,7 +313,7 @@ class Wordpress
         $authors = $this->getAuthorsToAttach($briefing);
 
         if (!empty($authors)) {
-            $authorsTaxonomyIds =  wp_set_object_terms($postId, $authors, 'rb_author');
+            $authorsTaxonomyIds =  wp_set_object_terms($postId, $authors, 'rb_authors');
         }
 
         if (is_wp_error($authorsTaxonomyIds)) {

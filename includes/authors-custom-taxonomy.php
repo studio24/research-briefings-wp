@@ -1,6 +1,6 @@
 <?php
 /***
- * Creating the custom taxonomy "rb_author" for research briefings
+ * Creating the custom taxonomy "rb_authors" for research briefings
  */
 
 add_action( 'init', 'author_custom_taxonomy' );
@@ -35,5 +35,5 @@ function author_custom_taxonomy() {
         'rewrite'               => array( 'slug' => 'author' ),
     );
 
-    register_taxonomy( 'rb_author', array('post', 'research-briefing'), $args );
+    register_taxonomy( 'rb_authors', array('post', 'research-briefing'), $args );
 }
