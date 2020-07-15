@@ -1,6 +1,6 @@
 <?php
 /***
- * Creating the custom taxonomy "type" for research briefings
+ * Creating the custom taxonomy "rb_types" for research briefings
  */
 
 add_action( 'init', 'pds_custom_taxonomy' );

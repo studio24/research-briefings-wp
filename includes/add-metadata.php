@@ -12,7 +12,7 @@ function pds_add_metadata() {
         $title = get_the_title($post->ID);
         $permalink = get_the_permalink($post->ID);
         $date = get_the_modified_date('d/m/Y H:i:s', $post->ID);
-        $authors = wp_get_post_terms($post->ID, 'post_tag', array('fields' => 'names'));
+        $authors = wp_get_post_terms($post->ID, 'rb_authors', array('fields' => 'names'));
         $topics = json_decode(get_post_meta($post->ID, 'topics', true));
         $section = get_post_meta($post->ID, 'section', true);
 

@@ -79,6 +79,35 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Find a row with a certain Id
+     *
+     * @param string $fieldName
+     * @param $id
+     * @return mixed
+     */
+    public function findOneById($id, $fieldName = 'id')
+    {
+        $sql = 'SELECT * from ' . $this->tableName . ' where ' . $fieldName . ' = :id';
+        try {
+            $query = $this->connection->prepare($sql);
+            $query->bindParam(':id', $id, \PDO::PARAM_STR);
+
+            $query->execute();
+
+            $result = $query->fetch(\PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $e->getMessage(), E_USER_ERROR);
+        }
+        if (empty($result)) {
+
+            return false;
+        }
+
+        return $this->translateSingleResultToModel($result);
+    }
+
+    /**
      * Translates DB row results to an array of appropriate models
      *
      * @param array $results
@@ -130,3 +159,4 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
 }
+
