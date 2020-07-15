@@ -97,6 +97,11 @@ class Briefing implements SearchInterface
     protected $typeTags;
 
     /**
+     * @var string
+     */
+    protected $authorTags;
+
+    /**
      * Mapping the main research briefing array fields to the object properties
      *
      * @param $data
@@ -807,6 +812,24 @@ class Briefing implements SearchInterface
     public function setTypeTags(string $typeTags): Briefing
     {
         $this->typeTags = $typeTags;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorTags(): ?string
+    {
+        return $this->authorTags;
+    }
+
+    /**
+     * @param string $authorTags
+     * @return Briefing
+     */
+    public function setAuthorTags(string $authorTags): Briefing
+    {
+        $this->authorTags = $authorTags;
         return $this;
     }
 

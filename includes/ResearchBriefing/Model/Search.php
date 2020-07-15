@@ -56,6 +56,9 @@ class Search
     /** @var  */
     protected $types;
 
+    /** @var  */
+    protected $authors;
+
     /**
      * Model constructor.
      * @param array $data
@@ -292,5 +295,24 @@ class Search
         $this->types = $types;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthors(): ?string
+    {
+        return $this->authors;
+    }
+
+    /**
+     * @param mixed $authors
+     * @return Search
+     */
+    public function setAuthors(string $authors = null): Search
+    {
+        $this->authors = $authors;
+        return $this;
+    }
+
 
 }

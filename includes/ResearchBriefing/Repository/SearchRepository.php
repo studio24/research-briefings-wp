@@ -25,7 +25,8 @@ class SearchRepository extends BaseRepository
         'url'            => ':url',
         'date'           => ':date',
         'year'           => ':year',
-        'types'           => ':types',
+        'types'          => ':types',
+        'authors'        => ':authors'
     ];
 
 
@@ -126,6 +127,11 @@ class SearchRepository extends BaseRepository
         if (isset($databaseBindings['categories'])) {
             $categories = $search->getTags();
             $query->bindParam(':categories', $categories, \PDO::PARAM_STR);
+        }
+
+        if (isset($databaseBindings['authors'])) {
+            $authors = $search->getAuthorTags();
+            $query->bindParam(':authors', $authors, \PDO::PARAM_STR);
         }
 
         // Briefing types only apply to Research Briefing records

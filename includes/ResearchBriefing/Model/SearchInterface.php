@@ -13,4 +13,6 @@ interface SearchInterface
 
     public function setTags(string $tags);
 
+    public function setAuthorTags(string $authors);
+
 }
