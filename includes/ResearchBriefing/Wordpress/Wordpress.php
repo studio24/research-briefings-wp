@@ -2,6 +2,7 @@
 
 namespace ResearchBriefing\Wordpress;
 
+use DOMDocument;
 use Exception;
 use ResearchBriefing\Briefing;
 use ResearchBriefing\Exception\NotFoundException;
@@ -148,7 +149,14 @@ class Wordpress
 
         $this->setTaxonomiesToPost($postId, $briefing) ;
 
-        $this->setImage($this->getCategoriesToAttach($briefing), $postId);
+        $blog_id = get_current_blog_id();
+
+        // Assign the first content image as a featured image for POST
+        if ($blog_id === 3) {
+            $this->setPostLibraryImage($briefing, $postId);
+        } else {
+            $this->setImage($this->getCategoriesToAttach($briefing), $postId);
+        }
 
         // Set extra properties to a briefing for search purposes
         $this->setExtraProperties($briefing, $postId);
@@ -327,7 +335,9 @@ class Wordpress
 
 
     /**
-     * Assigning images to the relevant categories of newly created posts
+     * Assigning images from the relevant categories of newly created posts
+     *
+     * Only for Commons and Lords
      *
      * @param $categories
      * @param $post
@@ -477,4 +487,86 @@ class Wordpress
         $briefing->setTypeTags(json_encode($types));
 
     }
+
+
+    /**
+     * Method that sets the first image from the RB content as a featured image
+     * Only for POST
+     *
+     * @param Briefing $briefing
+     * @param int $postId
+     */
+    public function setPostLibraryImage(Briefing $briefing, int $postId)
+    {
+        $postFeaturedImageUrl = $this->extractImageFromContent($briefing);
+
+        if (!$postFeaturedImageUrl) {
+            return;
+        }
+
+        // Upload the image to the media library
+        $filename = basename($postFeaturedImageUrl);
+        $upload_file = wp_upload_bits($filename, null, file_get_contents($postFeaturedImageUrl));
+
+        if (!$upload_file['error']) {
+            $wp_filetype = wp_check_filetype($filename, null);
+
+            // Insert the image as an attachment
+            $attachment = array(
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title'     => preg_replace('/\.[^.]+$/', '', $filename),
+                'post_content'   => '',
+                'post_status'    => 'inherit'
+            );
+
+            $attachment_id = wp_insert_attachment($attachment, $upload_file['file'], $postId);
+
+            if (!is_wp_error($attachment_id)) {
+
+                // Generate the metadata for the attachment, and update the database record.
+                require_once(ABSPATH . 'wp-admin/includes/image.php');
+                $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_file['file']);
+                wp_update_attachment_metadata($attachment_id, $attachment_data);
+
+                // Set the featured image on the RB post
+                set_post_thumbnail((int)$postId, (int)$attachment_id);
+            }
+        }
+
+    }
+
+    /**
+     * Method that extracts the first image from the html content field of a Research briefing
+     *
+     * @param $briefing
+     * @return mixed|null
+     */
+    public function extractImageFromContent($briefing)
+    {
+        //Create a new DOMDocument object.
+        $htmlDom = new DOMDocument;
+
+        //Load the HTML string into our DOMDocument object.
+        $htmlDom->loadHTML($briefing->getHtmlSummary());
+
+        //Extract all img elements / tags from the HTML.
+        $imageTags = $htmlDom->getElementsByTagName('img');
+
+        //Create an array to add extracted images to.
+        $images = array();
+
+        $postFeaturedImage = null;
+
+        //Loop through the image tags that DOMDocument found.
+        foreach ($imageTags as $imageTag) {
+            $images[] = $imageTag->getAttribute('src');
+
+            if ($images[0]) {
+                $postFeaturedImage = $images[0];
+            }
+        }
+
+       return $postFeaturedImage;
+    }
+
 }
