@@ -21,4 +21,4 @@ Wordpress:setPostLibraryImage()
 ```
 
 
-You can check [here](docs/featured-images.md) the details of the original featured images functionality.
+You can check [here](./htdocs/content/plugins/research-briefings-wp/docs/featured-images.md) the details of the original featured images functionality.
