@@ -1,4 +1,4 @@
-# Research Briefings Import - initial process 
+# Research Briefings Import process
 
 The import process fetches either the complete research briefings data for each library or the most recent ones (200 briefings) from the Research briefings API.
 
@@ -50,13 +50,15 @@ Post fields:
 ### Taxonomies
 
 After setting the corresponding fields for the research briefing custom post, the following taxonomies are added to the newly or updated posts:
-   * Category (represents the research briefing Topics)
-   * Post_tag (represents the research briefings Authors)
-   * Type (represents the research briefing Types)
+   * rb_topics (represents the research briefing Topics)
+   * rb_authors (represents the research briefings Authors)
+   * rb_types (represents the research briefing Types)
    
-   These taxonomies are saved by using the `wp_set_object_terms` WordPress method which replaces data by default, whenever the import is ran.
+   The topics and authors taxonomies are saved by using the `wp_set_object_terms` WordPress method which replaces data by default, whenever the import is ran.
    
-   Authors and types are attached to the post based on their term existence in WordPress, in order to avoid duplications.
+   The types taxonomy is used to append new category terms that come from the data import, and also to add the custom terms that users are adding in the CMS. The import does not overwrite the type terms.   
+   
+   Authors are attached to the post based on their term existence in WordPress, in order to avoid duplications.
    
    
 #### Categories   
@@ -72,11 +74,17 @@ Images are assigned to the newly created research briefing posts from the catego
 
 ### Setting extra properties for Search
 
-Extra research briefing post variables are processed and set on the briefing object in order to display the necessary information for the search results:
+Extra variables are processed and set on the briefing object and on the insight object in order to display the necessary information for the search results:
    * Permalink slug
    * Thumbnail
-   * Category terms that are set as Tags
+   * Topic terms that are set as Tags 
+   * Author terms that are set as AuthorTags
     
+### Setting multiple types for Search
+
+Since Insights do not contain the types taxonomy, a separate method  `Wordpress:setMultipleTypes()` was created to set up the multiple Type terms on the briefing object to include this information in the search results page.
+
+A `save_post_research-briefing` hook was created to update the Search records whenever a Type is added manually to a Research briefing in Wordpress. The functionality for this action can be found in the file `htdocs/content/plugins/research-briefings-wp/includes/set-types-on-search.php`
 
 ##  Importing Insights
 
@@ -85,6 +93,9 @@ After the research briefings import process has ran, we are also importing Insig
 The process to import insights is as follows:
 * Retrieving the current insights content from all the multisite posts table
 * Saving the insight data in the search repository
+
+
+NB: information about how the initial data import process worked can be found [here](docs/import-process.md).
 
 
    

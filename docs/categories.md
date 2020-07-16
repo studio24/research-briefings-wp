@@ -1,6 +1,6 @@
 # Categories mapping
 
-Research Briefings topics are mapped to Wordpress categories within the crosstagging tool called *Research Briefings*. This tool is available in the WordPress admin panel.
+Research Briefings topics are mapped to Wordpress topics within the crosstagging tool called *Research Briefings*. This tool is available in the WordPress admin panel.
 
 ## How the tool works
 
@@ -8,7 +8,7 @@ Initially, all the imported data is assigned to the category *Research Briefing*
 
 If the topic isn't matched, it will appear as a new category under the _Unassigned Research Briefings Topics_ column. This can be dragged into its own category or an existing one. 
 
-Parent categories created manually will also appear in the Ingester under the _Second Reading Categories_ column to allow topic terms to be assigned to them.
+Parent topics created manually will also appear in the Ingester under the _Second Reading Categories_ column to allow imported terms to be assigned to them.
 
 ## Technical details
 
