@@ -95,7 +95,7 @@ The process to import insights is as follows:
 * Saving the insight data in the search repository
 
 
-NB: information about how the initial data import process worked can be found [here](./htdocs/content/plugins/research-briefings-wp/docs/import-process.md).
+NB: information about how the initial data import process worked can be found [here](../import-process.md).
 
 
    
