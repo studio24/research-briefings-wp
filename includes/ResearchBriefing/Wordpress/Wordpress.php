@@ -394,6 +394,20 @@ class Wordpress
 
         $object->setTags(json_encode($categories));
 
+        // Author terms
+        $authorTerms = get_the_terms($postId , 'rb_authors' );
+
+        // Save the author terms as a comma separated string
+        $authors = [];
+
+        if (!empty($authorTerms) ) {
+            foreach ($authorTerms as $term) {
+                $authors[] = trim(html_entity_decode(($term->name)));
+            }
+        }
+
+        $object->setAuthorTags(json_encode($authors));
+
     }
 
     /**

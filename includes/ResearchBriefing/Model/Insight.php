@@ -46,6 +46,11 @@ class Insight implements SearchInterface
     protected $tags;
 
     /**
+     * @var string
+     */
+    protected $authorTags;
+
+    /**
      * Model constructor.
      * @param array $data
      */
@@ -244,6 +249,24 @@ class Insight implements SearchInterface
     public function setTags(string $tags): Insight
     {
         $this->tags = $tags;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorTags(): ?string
+    {
+        return $this->authorTags;
+    }
+
+    /**
+     * @param string $authorTags
+     * @return Insight
+     */
+    public function setAuthorTags(string $authorTags): Insight
+    {
+        $this->authorTags = $authorTags;
         return $this;
     }
 
