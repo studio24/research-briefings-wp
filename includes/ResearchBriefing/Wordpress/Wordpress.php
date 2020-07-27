@@ -160,6 +160,9 @@ class Wordpress
 
         // Set extra properties to a briefing for search purposes
         $this->setExtraProperties($briefing, $postId);
+
+        // Set all the types to a briefing (RB ones) for search purposes
+        $this->setMultipleTypes($briefing, $postId);
     }
 
     /**

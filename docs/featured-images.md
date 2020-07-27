@@ -1,4 +1,4 @@
-# Featured images
+# Featured images - initial details
 
 When there is a new Research briefing post created as part of the import process, the featured image is set from the post's corresponding categories. If any category of the post has a termmeta with the meta key *rb_images*, the image ID of the last category is returned and attached to the given post.
 

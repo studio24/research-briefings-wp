@@ -15,6 +15,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 if (class_exists('WP_CLI')) {
 require_once __DIR__ . '/includes/research-briefings-import.php';
+require_once __DIR__ . '/includes/author-tags-import.php';
+
 }
 
 include_once ('includes/custom-post-type.php');
