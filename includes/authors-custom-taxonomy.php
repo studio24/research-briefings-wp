@@ -32,7 +32,7 @@ function author_custom_taxonomy() {
         'show_admin_column'     => true,
         'update_count_callback' => '_update_post_term_count',
         'query_var'             => true,
-        'rewrite'               => array( 'slug' => 'author' ),
+        'rewrite'               => array( 'slug' => 'authors' ),
     );
 
     register_taxonomy( 'rb_authors', array('post', 'research-briefing'), $args );
