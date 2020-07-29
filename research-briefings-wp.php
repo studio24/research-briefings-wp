@@ -32,6 +32,9 @@ include_once ('includes/topics-custom-taxonomy.php');
 include_once ('includes/authors-custom-taxonomy.php');
 include_once ('includes/set-types-on-search.php');
 
+// Allow sticky posts to appear on archive pages
+//include_once ('includes/sticky-posts-in-archive.php');
+
 
 
 if (!empty($_REQUEST['s24_run'])) {
