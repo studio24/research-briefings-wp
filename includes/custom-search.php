@@ -62,6 +62,12 @@ function parliament_library_classname($siteId)
     }
 }
 
+function add_custom_query_variables_to_wp_query( $qvars ) {
+	$qvars[] = 'library';
+	return $qvars;
+}
+add_filter( 'query_vars', 'add_custom_query_variables_to_wp_query' );
+
 /**
  * Hook that overwrites the default WP search and
  * replaces the results with the ones from our custom search queries
