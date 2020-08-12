@@ -32,7 +32,7 @@ function pds_custom_taxonomy() {
         'show_admin_column'     => true,
         'update_count_callback' => '_update_post_term_count',
         'query_var'             => true,
-        'rewrite'               => array( 'slug' => 'briefing-type' ),
+        'rewrite'               => array( 'slug' => 'type' ),
     );
 
     register_taxonomy( 'rb_types', array('post', 'research-briefing'), $args );
