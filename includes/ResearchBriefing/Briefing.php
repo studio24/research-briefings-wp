@@ -537,17 +537,17 @@ class Briefing implements SearchInterface
                 // Commons
                 switch ($type) {
                     case 'Commons Debate packs':
-                        $this->type = 'Commons Debate Pack';
+                        $this->type = 'Debate Pack';
                         break;
                     case 'Commons Briefing papers':
                     default:
-                        $this->type = 'Commons Research Briefing';
+                        $this->type = 'Research Briefing';
                         break;
                 }
                 break;
             case 2:
                 // Lords
-                $this->type = 'Lords Research Briefing';
+                $this->type = 'Research Briefing';
                 break;
             case 3:
                 // POST
