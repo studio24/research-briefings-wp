@@ -25,7 +25,7 @@ function setPostProperties($briefing) {
        'post_date_gmt'  => $briefing->getDate(),
        'comment_status' => 'closed',
        'thumbnail'      => $briefing->getThumbnailLink() ? get_site_url($briefing->getSite()). '/'. $briefing->getThumbnailLink() : '',
-       'tags'           => json_decode($briefing->getCategories()),
+       'topics'         => json_decode($briefing->getCategories()),
        'authors'        => json_decode($briefing->getAuthors()),
        'site'           => $briefing->getSite(),
        'library'        => $briefing->getSite() === 1 ? 'House of Commons Library' :
