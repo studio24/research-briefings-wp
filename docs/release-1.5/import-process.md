@@ -12,7 +12,7 @@ After the API data is mapped to the Briefing object, the following checks are pe
         * Documents
         
         
-If the research briefings objects were successfully returned from the API the import loops through all briefings and tries to insert each one into WordPress and then save or update the briefing to the database for the search functionality in case it has the status `published`. If it's not published the briefing is removed from the search index.
+If the research briefings objects were successfully returned from the API, the import loops through all briefings and tries to insert each one into WordPress. If the briefing has the `published` status, it is saved/updated in the search table. If it's not published, the briefing is removed from the search index.
 
 ##  Importing data from API to Wordpress
 

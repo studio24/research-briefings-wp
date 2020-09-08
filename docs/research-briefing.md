@@ -4,7 +4,10 @@ Research Briefings represents the dataset for many objects used on the website. 
 
 ## Running the import
 
-You need to be in the WordPress folder when running WP CLI (`/htdocs`).
+You need to be in the WordPress folder when running WP CLI (`/htdocs`) and specify the environment with this command:
+
+`export WP_ENV=localdev` where localdev is the local env
+
 
 ### Importing a single Research Briefing
 
