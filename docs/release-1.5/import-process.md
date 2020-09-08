@@ -65,7 +65,7 @@ After setting the corresponding fields for the research briefing custom post, th
 
    The categories are mapped by matching research briefing topics which come from the API with WordPress category terms via crosstagged categories (the WP option `research_briefings_crosstagged` which is a serialized array of categories)
     
-   More information about the categories and how the Ingester (often called crosstagging tool) works can be found [here](categories.md).
+   More information about the categories and how the Ingester (often called crosstagging tool) works can be found [here](../categories.md).
    
    
 ### Setting Featured images
