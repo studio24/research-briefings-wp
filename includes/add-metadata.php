@@ -21,7 +21,7 @@ function pds_add_metadata() {
 
         if (is_array($authors)) {
             foreach ($authors as $author) {
-                echo '<meta name="citation_author" content="' . $author . '"">';
+                echo '<meta name="citation_author" content="' . $author . '">';
             }
         }
 
@@ -29,7 +29,7 @@ function pds_add_metadata() {
 
         if (is_array($topics)) {
             foreach ($topics as $topic) {
-                echo '<meta name="citation_topic" content="' . $topic->prefLabel->_value . '"">';
+                echo '<meta name="citation_topic" content="' . $topic->prefLabel->_value . '">';
             }
         }
 
