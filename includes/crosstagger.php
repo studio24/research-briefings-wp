@@ -22,6 +22,8 @@ function research_briefings_load_crosstagger_styles($hook) {
     if($hook != 'toplevel_page_research-briefings') {
         return;
     }
+    wp_enqueue_script('custom_wp_admin_jquery','https://code.jquery.com/jquery-3.5.1.min.js');
+    wp_enqueue_script('custom_wp_admin_jquery_ui','https://code.jquery.com/ui/1.12.0/jquery-ui.min.js');
     wp_enqueue_script( 'custom_wp_admin_css', plugins_url('../public/js/drag-drop.js', __FILE__) );
     wp_enqueue_style( 'custom_wp_admin_css', plugins_url('../public/css/ingester.css', __FILE__) );
 }
