@@ -28,7 +28,7 @@ include_once('includes/loop-modifiers.php');
 include_once('includes/crosstagger.php');
 include_once('includes/category-images.php');
 include_once ('includes/add-metadata.php');
-include_once ('includes/custom-search.php');
+//include_once ('includes/custom-search.php');
 include_once ('includes/helper.php');
 include_once ('includes/topics-custom-taxonomy.php');
 include_once ('includes/authors-custom-taxonomy.php');

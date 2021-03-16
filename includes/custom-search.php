@@ -84,6 +84,10 @@ function pds_modify_posts_list() {
             $searchKeyword = trim($searchKeyword);
         }
 
+        echo "<pre>";
+        var_dump($searchKeyword);
+	    echo "</pre>";
+
         if (isset($wp_query->query_vars['posts_per_page'])) {
             $limit = (int) $wp_query->query_vars['posts_per_page'];
         }
@@ -121,7 +125,7 @@ function pds_modify_posts_list() {
             }
 
             // Empty the existing wp_query to make sure no default post is returned
-            $wp_query->posts = [];
+//            $wp_query->posts = [];
 
             foreach ($results as $index => $result) {
 
