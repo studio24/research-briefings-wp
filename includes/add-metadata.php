@@ -19,21 +19,45 @@ function pds_add_metadata() {
         echo '<link rel="canonical" href="' . $permalink . '"/>
             <meta name="citation_title" content="' . $title . '" >';
 
+
+
         if (is_array($authors)) {
             foreach ($authors as $author) {
                 echo '<meta name="citation_author" content="' . $author . '">';
             }
         }
+        // if not Array, assume it's a string
+        else {
+	        echo '<meta name="citation_author" content="' . $authors . '">';
+        }
+
+
 
         echo '<meta name="citation_online_date" content="' . $date . '">';
+
+
 
         if (is_array($topics)) {
             foreach ($topics as $topic) {
                 echo '<meta name="citation_topic" content="' . $topic->prefLabel->_value . '">';
             }
         }
+        // if not Array, assume it's a string
+        else {
+	        echo '<meta name="citation_author" content="' . $topics . '">';
+        }
 
-        echo '<meta name="citation_section" content="' . $section . '">';
+
+
+	    if (is_array($section)) {
+		    foreach ($section as $section_item) {
+			    echo '<meta name="citation_section" content="' . $section_item . '">';
+		    }
+	    }
+	    // if not Array, assume it's a string
+	    else {
+		    echo '<meta name="citation_section" content="' . $section . '">';
+	    }
 
     }
 }
