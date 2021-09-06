@@ -496,9 +496,9 @@ class Briefing implements SearchInterface
     /**
      * @return string
      */
-    public function getSections(): ?array
+    public function getSections(): ?string
     {
-        return json_decode($this->section, true) ?? [$this->section];
+        return $this->section;
     }
 
     /**
