@@ -188,7 +188,7 @@ class Wordpress
             'topics'        => $briefing->getTopics() ? json_encode($briefing->getTopics()) : [],
             'related_link'  => $briefing->getRelatedLink() ? json_encode($briefing->getRelatedLink()) : [],
             'documents'     => $briefing->getDocuments() ? json_encode($briefing->getDocuments()) : [],
-            'section'       => $briefing->getSection(),
+            'section'       => $briefing->getSections(),
             'import_last_update' => $now->format('r'),
         ];
 

@@ -130,7 +130,7 @@ class Briefing implements SearchInterface
         }
 
         if (isset($data['section'][0]['prefLabel']['_value'])){
-            $this->setSection($data['section'][0]['prefLabel']['_value']);
+            $this->setSections($data['section']);
         }
 
         if (isset($data['subType']['prefLabel']['_value'])){
@@ -496,18 +496,27 @@ class Briefing implements SearchInterface
     /**
      * @return string
      */
-    public function getSection(): ?string
+    public function getSections(): ?array
     {
-        return $this->section;
+        return json_decode($this->section, true) ?? [$this->section];
     }
 
     /**
      * @param string $section
      * @return Briefing
      */
-    public function setSection(string $section): Briefing
+    public function setSections(array $sections): Briefing
     {
-        $this->section = $section;
+        $stored_sections = [];
+
+        foreach ($sections as $section) {
+            $stored_sections[] = [
+                'title' => $section['prefLabel']['_value'],
+                'url' => $section['_about']
+            ];
+        }
+
+        $this->section = json_encode($stored_sections);
         return $this;
     }
 
