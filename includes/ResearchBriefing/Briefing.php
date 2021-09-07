@@ -34,9 +34,9 @@ class Briefing implements SearchInterface
      */
     protected $publisher;
     /**
-     * @var string
+     * @var array
      */
-    protected $section;
+    protected $sections;
     /**
      * @var string
      */
@@ -498,7 +498,7 @@ class Briefing implements SearchInterface
      */
     public function getSections(): ?array
     {
-        return $this->section;
+        return $this->sections;
     }
 
     /**
@@ -507,7 +507,7 @@ class Briefing implements SearchInterface
      */
     public function setSections(array $sections): Briefing
     {        
-        $this->section = $sections;
+        $this->sections = $sections;
         return $this;
     }
 
