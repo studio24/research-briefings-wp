@@ -496,7 +496,7 @@ class Briefing implements SearchInterface
     /**
      * @return string
      */
-    public function getSections(): ?string
+    public function getSections(): ?array
     {
         return $this->section;
     }
@@ -506,17 +506,8 @@ class Briefing implements SearchInterface
      * @return Briefing
      */
     public function setSections(array $sections): Briefing
-    {
-        $stored_sections = [];
-
-        foreach ($sections as $section) {
-            $stored_sections[] = [
-                'title' => $section['prefLabel']['_value'],
-                'url' => $section['_about']
-            ];
-        }
-
-        $this->section = json_encode($stored_sections);
+    {        
+        $this->section = $sections;
         return $this;
     }
 

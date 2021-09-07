@@ -47,10 +47,12 @@ function pds_add_metadata() {
 	        echo '<meta name="citation_author" content="' . $topics . '">';
         }
 
-	    if (is_array($section)) {
-		    foreach ($section as $section_item) {
+        $section_array = json_decode($section,true);
 
-			    echo '<meta name="citation_section" content="' . $section_item['title'] . '">';
+	    if (is_array($section_array)) {
+		    foreach ($section_array as $section_item) {
+
+			    echo '<meta name="citation_section" content="' . $section_item['prefLabel']['_value'] . '">';
 		    }
 	    }
 	    // if not Array, assume it's a string
