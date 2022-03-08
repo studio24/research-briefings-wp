@@ -47,27 +47,27 @@ function pds_add_metadata() {
 	        echo '<meta name="citation_author" content="' . $topics . '">';
         }
 
-        $section_json = json_decode($section,true);
+        if (is_array($section)) {
 
-	    if (is_array($section_json)) {
-		    foreach ($section_json as $section_item) {
+            foreach ($section as $section_item) {
 
-			    echo '<meta name="citation_section" content="' . $section_item['prefLabel']['_value'] . '">';
-		    }
-	    } else {
+                echo '<meta name="citation_section" content="' . $section_item . '">';
+            }
+
+        } else {
+
+            $section = json_decode($section, true);
 
             if (is_array($section)) {
-
                 foreach ($section as $section_item) {
 
-                    echo '<meta name="citation_section" content="' . $section_item . '">';
+                    echo '<meta name="citation_section" content="' . $section_item['prefLabel']['_value'] . '">';
                 }
-
             } else {
                 // Assume just a string.
                 echo '<meta name="citation_section" content="' . $section . '">';
             }
-	    }
+        }
 
     }
 }
