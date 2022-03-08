@@ -9,7 +9,8 @@ function research_briefings_add_category_image_field($category) {
 	} else {
 	    // Some default image
 		$image = '<img id="research_briefings-preview-image" src="https://placehold.it/200" />';
-	} ?>
+
+    } ?>
 	 <tr class="form-field">
 			<th scope="row">
 				<label for="categoryImage">Research Briefing images</label>
@@ -22,7 +23,7 @@ function research_briefings_add_category_image_field($category) {
 	</tr>
 	<?php
 }
-add_action('category_edit_form_fields', 'research_briefings_add_category_image_field', 10);
+add_action('rb_topics_edit_form_fields', 'research_briefings_add_category_image_field', 10);
 
 // Ajax action to refresh the user image
 add_action( 'wp_ajax_research_briefings_get_image', 'research_briefings_get_image'   );
@@ -63,4 +64,4 @@ function category_save_image( $term_id ) {
 	}
 
 }
-add_action( 'edited_category', 'category_save_image' );
+add_action( 'edited_rb_topics', 'category_save_image' );

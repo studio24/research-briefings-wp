@@ -1,5 +1,9 @@
 # Research Briefings WP
-A simple plugin to ingest UK Parliament's Research Briefings into a WordPress blog as posts.
+
+A simple plugin to import UK Parliament's Research Briefings into a WordPress site.
+
+**TODO: Studio 24 are converting the import process to run on the Linux cron via WP CLI. Docs 
+will be updated as we progress.**
 
 ## Requirements
 - A WordPress blog running WordPress 4.3 or above

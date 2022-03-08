@@ -22,6 +22,8 @@ function research_briefings_load_crosstagger_styles($hook) {
     if($hook != 'toplevel_page_research-briefings') {
         return;
     }
+    wp_enqueue_script('custom_wp_admin_jquery','https://code.jquery.com/jquery-3.5.1.min.js');
+    wp_enqueue_script('custom_wp_admin_jquery_ui','https://code.jquery.com/ui/1.12.0/jquery-ui.min.js');
     wp_enqueue_script( 'custom_wp_admin_css', plugins_url('../public/js/drag-drop.js', __FILE__) );
     wp_enqueue_style( 'custom_wp_admin_css', plugins_url('../public/css/ingester.css', __FILE__) );
 }
@@ -71,7 +73,12 @@ function research_briefings_wp_page_callback() {
 
 // Needs writing
 function research_briefings_format_wp_categories($currentSettings) {
-    $categories = get_categories(array('hide_empty' => false));
+//    $categories = get_categories(array('hide_empty' => false));
+    $categories = get_terms([
+        'taxonomy' => 'rb_topics',
+//        'fields' => 'ids',
+        'hide_empty' => false
+    ]);
     foreach ($categories as $category) {
         $alreadySet = false;
         $extraLi = '';
@@ -87,6 +94,12 @@ function research_briefings_format_wp_categories($currentSettings) {
     return $formatted;
 }
 
+/**
+ * Return RB API topics that have not been mapped to WordPress categories
+ *
+ * @param array $currentSettings Unserialized JSON array of current WP IDs => Research Briefing API topics
+ * @return string List of items for use on crosstagging admin page
+ */
 function research_briefings_format_rb_topics($currentSettings) {
 
     // Get all posts in correct category
@@ -94,46 +107,103 @@ function research_briefings_format_rb_topics($currentSettings) {
         'post_status' => array('publish', 'private'),
         'posts_per_page' => -1,
         'fields' => 'ids',
-        'category' => research_briefings_wp_get_or_create_category()
+        'post_type' => 'research-briefing'
     ));
 
-    $topicArray = [];
+    // Get all WP categories
+    $categories = get_terms([
+        'taxonomy' => 'rb_topics',
+        'fields' => 'ids',
+        'hide_empty' => false
+    ]);
 
-    //loop over each post
+    $unmappedTerms = [];
+    $errors = [];
+
+    // Build array of term URLs already mapped to WP categories
+    $alreadyTagged = [];
+    foreach ($currentSettings as $wpCategoryId => $apiTerms) {
+
+        // Skip if WP category no longer exists so we can retag
+        if (!in_array($wpCategoryId, $categories)) {
+            continue;
+        }
+
+        foreach ($apiTerms as $name => $url) {
+            $alreadyTagged[] = $url;
+        }
+    }
+
+    // Loop over each post
     foreach($posts as $p) {
-        //get the meta you need form each post
-        $topic = get_post_meta($p, 'topics', true);
-        $alreadyTagged = [];
+        try {
+            // Get topics (these are copied from the RB API)
+            $topics = get_post_meta($p, 'topics', true);
+            if (empty($topics)) {
+                // Topics not set for this research briefing
+                continue;
+            }
+            $topics = json_decode($topics, false, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            $errors[] = sprintf('Error decoding API topics for post ID <a href="/wp-admin/post.php?post=%s&action=edit">%s</a>', $p, $p);
+            continue;
+        }
 
-        if($topic !== '' && is_array($topic)) {
+        /**
+        $topics format (API term data):
 
-            foreach ($topic as $single) {
+         [0] => stdClass Object
+        (
+            [_about] => http://data.parliament.uk/terms/95492
+            [prefLabel] => stdClass Object
+                (
+                    [_value] => Armed forces
+                )
 
-                foreach ($currentSettings as $key => $value) {
-                    foreach ($currentSettings[$key] as $value2) {
-                        array_push($alreadyTagged, $value2);
-                    }
-                }
+        )
 
-                if(!in_array($single['_about'], $alreadyTagged)) {
-                    $topicReformatted = array('title' => $single['prefLabel']['_value'], 'id' => $single['_about']);
-                    array_push($topicArray, $topicReformatted);
+        $currentSettings format (WP ID, API Terms):
+
+        [46] => Array
+        (
+            [Economic policy] => http://data.parliament.uk/terms/95560
+            [Economic situation] => http://data.parliament.uk/terms/95561
+            [Financial institutions] => http://data.parliament.uk/terms/95602
+            [Financial services] => http://data.parliament.uk/terms/95603
+            [Loans] => http://data.parliament.uk/terms/95664
+            [Regulation] => http://data.parliament.uk/terms/95733
+            [Taxation] => http://data.parliament.uk/terms/95764
+            [International development] => http://data.parliament.uk/terms/95646
+            [Incomes and poverty] => http://data.parliament.uk/terms/95637
+            [Public expenditure] => http://data.parliament.uk/terms/95724
+            [Competition] => http://data.parliament.uk/terms/95531
+            [Consumers] => http://data.parliament.uk/terms/95534
+            [Insolvency] => http://data.parliament.uk/terms/95642
+            [World economy] => http://data.parliament.uk/terms/95785
+        )
+        */
+
+        if (is_array($topics)) {
+            foreach ($topics as $topic) {
+                if (!in_array($topic->_about, $alreadyTagged)) {
+                    $unmappedTerms[$topic->_about] = ['title' => $topic->prefLabel->_value, 'id' => $topic->_about];
                 }
             }
 
         }
     }
 
-    // Remove duplicates
-    $topicArray = array_map('unserialize', array_unique(array_map('serialize', $topicArray)));
+    $content = '';
 
-    $formatted = '';
-
-    foreach ($topicArray as $single) {
-        $formatted = $formatted . '<li data-topic-name="'.$single['id'].'">'.$single['title'].'</li>';
+    if (!empty($errors)) {
+        $content .= '<p><em>' . implode(', ', $errors) . '</em></p>';
     }
 
-    return $formatted;
+    foreach ($unmappedTerms as $topic) {
+        $content = $content . '<li data-topic-name="'.$topic['id'].'">'.$topic['title'].'</li>';
+    }
+
+    return $content;
 }
 
 $crossTagOptions = get_option('research_briefings_crosstagged');
