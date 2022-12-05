@@ -1,4 +1,6 @@
 # Research Briefings WP
+THIS REPO IS NO LONGER IN USE
+
 A simple plugin to ingest UK Parliament's Research Briefings into a WordPress blog as posts.
 
 ## Requirements
